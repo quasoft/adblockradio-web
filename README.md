@@ -11,6 +11,8 @@ Uses the `mozGetMetadata` method, so it currently works only in Firefox and only
 
 *Other browsers (eg. IE, Edge, Chrome, Safari) are currently not supported, because of lack of `getMetadata` method on the `audio` object.*
 
+[Live demo](https://quasoft.github.io/adblockradio-web/)
+
 ## How to install
 
 1. Add OGG stream URLs for your favourite radio stations in the `stations` array inside `script/config.js`:
