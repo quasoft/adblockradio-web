@@ -1,0 +1,212 @@
+/* Background animation - Pen by Manuel Pinto */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+@-webkit-keyframes Gradient {
+	0% { background-position: 0% 50% }
+	50% { background-position: 100% 50% }
+	100% { background-position: 0% 50% }
+}
+
+@-moz-keyframes Gradient {
+	0% { background-position: 0% 50% }
+	50% { background-position: 100% 50% }
+	100% { background-position: 0% 50% }
+}
+
+@keyframes Gradient {
+	0% { background-position: 0% 50% }
+	50% { background-position: 100% 50% }
+	100% { background-position: 0% 50% }
+}
+
+body {
+  background: linear-gradient(-45deg,#EE7752, #23D5AB, #E73C7E, #23A6D5);
+	background-size: 400% 400%;
+}
+
+body.is-playing {
+  animation: Gradient 15s ease infinite;
+  -webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+}
+
+/* Player */
+#audio {
+  display: none;
+}
+
+.meta {
+  position: absolute;
+  width: 100%;
+  bottom: 10%;
+  text-align: center;
+  font-family: monospace;
+  font-size: 28px;  
+  color: #fff;
+}
+
+.meta span {
+  display: inline-block;
+}
+
+.meta .title { 
+  border-left: 0.5em solid lime;
+  margin-left: 0.5em;
+  padding-left: 0.5em;
+  font-weight: bold;
+}
+
+.meta .station {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.meta button.change-now {
+  display: inline-block;
+  border: none;
+  background-color: none;
+  background: none;
+  outline: none;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.meta button.change-now:hover {
+  animation: pop 1s linear infinite;
+  transform-origin: 50% 45%;
+}
+
+@keyframes pop {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+.controls button {
+  display: block;
+  position: absolute;
+  top: 0%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border: none;
+  background-color: none;
+  background: none;
+  outline: none;
+}
+
+.controls button img {
+  width: 100%;
+  height: 100%;
+}
+
+.controls button:active, .controls button:focus,.controls button:hover {
+  outline: none;
+}
+
+.controls .play {
+  display: block;
+}
+
+.controls .pause {
+  display: none;
+}
+
+body.is-playing .controls .play {
+  display: none;
+}
+
+body.is-playing .controls .pause {
+  display: block;
+}
+
+@media screen and (max-width: 1280px) {
+  .meta {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .meta {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .meta {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .meta {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .meta {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 199px) {
+  .meta {
+    font-size: 10px;
+  }
+}
+
+/* Pulse animation */
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}

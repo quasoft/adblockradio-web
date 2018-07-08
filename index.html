@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <title>AdBlockRadio Web - the Web Radio Player that Blocks Commercials</title>    
+    <link rel="stylesheet" type="text/css" href="theme/style.css" />
+    <script src="script/config.js"></script>
+    <script src="script/player.js"></script>
+</head>
+<body>
+    <main>
+        <audio id="audio" controls preload="metadata">
+        Your browser does not support the &lt;audio&gt; tag.
+        </audio>
+        <div id="controls" class="controls">
+            <button id="play" class="play animated pulse" onclick="play()" title="Play"><img src="theme/images/play.svg" alt="Play" /></button>
+            <button id="pause" class="pause animated pulse" onclick="pause()" title="Pause"><img src="theme/images/pause.svg" alt="Pause" /></button>
+        </div>
+        <div class="meta">
+            <span id="title" class="title animated">&nbsp;</span><br />
+            <span id="station" class="station" onclick="changeStation()">&nbsp;</span><button class="change-now" onclick="changeStation()" title="Change station now"><img src="theme/images/change-station.svg" alt="Pause" /></button>
+        </div>
+    </main>
+</body>
+</html>
