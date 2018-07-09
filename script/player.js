@@ -26,6 +26,28 @@ function initPlayer() {
     var audio = getAudioEl();
     if (audio.addEventListener) {
         audio.addEventListener('loadedmetadata', onMetadata, false);
+        audio.addEventListener('abort', function() { console.log('Event abort'); }, false);
+        audio.addEventListener('canplay', function() { console.log('Event canplay'); }, false);
+        audio.addEventListener('canplaythrough', function() { console.log('Event canplaythrough'); }, false);
+        //audio.addEventListener('durationchange', function() { console.log('Event durationchange'); }, false);
+        audio.addEventListener('emptied', function() { console.log('Event emptied'); }, false);
+        audio.addEventListener('ended', function() { console.log('Event ended'); }, false);
+        audio.addEventListener('error', function() { console.log('Event error'); }, false);
+        audio.addEventListener('loadeddata', function() { console.log('Event loadeddata'); }, false);
+        audio.addEventListener('loadedmetadata', function() { console.log('Event loadedmetadata'); }, false);
+        audio.addEventListener('loadstart', function() { console.log('Event loadstart'); }, false);
+        audio.addEventListener('pause', function() { console.log('Event pause'); }, false);
+        audio.addEventListener('play', function() { console.log('Event play'); }, false);
+        audio.addEventListener('playing', function() { console.log('Event playing'); }, false);
+        //audio.addEventListener('progress', function() { console.log('Event progress'); }, false);
+        audio.addEventListener('ratechange', function() { console.log('Event ratechange'); }, false);
+        audio.addEventListener('seeked', function() { console.log('Event seeked'); }, false);
+        audio.addEventListener('seeking', function() { console.log('Event seeking'); }, false);
+        audio.addEventListener('stalled', function() { console.log('Event stalled'); }, false);
+        audio.addEventListener('suspend', function() { console.log('Event suspend'); }, false);
+        //audio.addEventListener('timeupdate', function() { console.log('Event timeupdate'); }, false);
+        audio.addEventListener('volumechange', function() { console.log('Event volumechange'); }, false);
+        audio.addEventListener('waiting', function() { console.log('Event waiting'); }, false);        
     }
 }
 
