@@ -13,13 +13,14 @@
         <audio id="audio" controls preload="metadata">
         Your browser does not support the &lt;audio&gt; tag.
         </audio>
+        <audio id="metareader" preload="metadata"></audio>
         <div id="controls" class="controls">
             <button id="play" class="play animated pulse" onclick="play()" title="Play"><img src="theme/images/play.svg" alt="Play" /></button>
             <button id="pause" class="pause animated pulse" onclick="pause()" title="Pause"><img src="theme/images/pause.svg" alt="Pause" /></button>
         </div>
         <div class="meta">
-            <span id="title" class="title animated">&nbsp;</span><br />
-            <span id="station" class="station" onclick="changeStation()">&nbsp;</span><button class="change-now" onclick="changeStation()" title="Change station now"><img src="theme/images/change-station.svg" alt="Pause" /></button>
+            <span id="title" class="title animated">Media Title</span><br />
+            <span id="station" class="station" onclick="changeStation()">Radio Station Name</span><button class="change-now" onclick="changeStation()" title="Change station now"><img src="theme/images/change-station.svg" alt="Pause" /></button>
         </div>
     </main>
 </body>

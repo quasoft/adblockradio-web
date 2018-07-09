@@ -10,6 +10,10 @@ function getAudioEl() {
     return document.getElementById('audio');
 }
 
+function getReaderEl() {
+    return document.getElementById('metareader');
+}
+
 function getTitleEl() {
     return document.getElementById('title');
 }
@@ -24,15 +28,41 @@ function getControlsEl() {
 
 function initPlayer() {
     var audio = getAudioEl();
-    if (audio.addEventListener) {
-        audio.addEventListener('loadedmetadata', onMetadata, false);
+    audio.addEventListener('loadedmetadata', onPlayerMetadata, false);
+    audio.addEventListener('stalled', onStalled, false);
+    audio.addEventListener('canplay', onCanPlay, false);
+
+    if (supportsGetMetadata()) {
+        setInterval(function() {
+            if (isPlaying) {
+                var reader = getReaderEl();
+                reader.addEventListener('loadedmetadata', onReaderMetadata, false);
+                reader.src = stations[currentStationIdx].url;
+                reader.muted = true;
+                reader.volume = 0;
+                reader.pause();
+                reader.load();
+                reader.play();
+                document.getElementById('audio').volume = 1;
+            }
+        }, 1000);
+    }
+}
+
+function getMetadata(audio) {
+    if (!supportsGetMetadata()) {
+        return {};
+    } else {
+        return audio.mozGetMetadata();
     }
 }
 
 function play() {
+    checkBrowserAndWarn();
     if (currentStationIdx < 0) {
         currentStationIdx = getRandomStation();
     }
+    stopReader();
     var audio = getAudioEl();
     audio.src = stations[currentStationIdx].url;
     audio.load();
@@ -44,6 +74,8 @@ function play() {
 }
 
 function pause() {
+    stopReader();
+
     var audio = getAudioEl();
     audio.pause();
 
@@ -51,10 +83,11 @@ function pause() {
     updateUIState();
 }
 
-function onMetadata() {
-    var meta = audio.mozGetMetadata();
-    console.log('Metadata received: ', meta);
-    
+function stopReader() {
+    getReaderEl().pause();
+}
+
+function onMetaObj(meta) {
     if (meta.hasOwnProperty('title')) {
         var title = meta['title'];
         if (isBlacklisted(title)) {
@@ -65,6 +98,44 @@ function onMetadata() {
                 updateUITitle(true);
             }
         }
+    }
+}
+
+function onPlayerMetadata() {
+    var audio = getAudioEl();
+    var meta = getMetadata(audio);
+    console.log('Metadata received in player: ', meta);
+    onMetaObj(meta);
+}
+
+function onReaderMetadata() {
+    var reader = getReaderEl();
+    var meta = getMetadata(reader);
+    console.log('Metadata received in meta reader: ', meta);
+    onMetaObj(meta);
+    stopReader();
+}
+
+function onStalled() {
+    console.log("Stalled");
+
+    // The stalled event does not work in Edge browser, so ignore it
+    if (navigator.userAgent.search("Edge") > -1) {
+        return;
+    }
+
+    if (isPlaying) {
+        var audio = getAudioEl();
+        audio.load();
+        audio.play();
+    }
+}
+
+function onCanPlay() {
+    console.log("Can play");
+    if (isPlaying) {
+        var audio = getAudioEl();
+        audio.play();
     }
 }
 
@@ -128,9 +199,21 @@ function changeStation() {
     play();
 }
 
+function supportsGetMetadata() {
+    var audio = getAudioEl();
+    return typeof(audio.mozGetMetadata) !== 'undefined';
+}
+
+function checkBrowserAndWarn() {
+    if (!supportsGetMetadata()) {
+        var titleEl = getTitleEl();
+        titleEl.innerHTML = "Ad detection works only in Firefox";
+        titleEl.style = "border-color: red";
+    }
+}
+
 if (window.addEventListener) {
     document.addEventListener("DOMContentLoaded", function(event) {
         initPlayer();
-        play();
     });
 }
