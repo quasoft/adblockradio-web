@@ -10,5 +10,6 @@ var blacklist = [
     ".*RADIO CITY.*",
     ".*RADIO ENERGY.*",
     ".*RADIO 1.*",
-    ".*NOVANEWS.*"
+    ".*NOVANEWS.*",
+    ".*KLASICHESKITE HITOVE.*"
 ];
